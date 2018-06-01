@@ -1,0 +1,57 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>
+      Details
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <div text-center *ngIf="pkmnData == null" padding>
+    <ion-spinner></ion-spinner>
+  </div>
+
+  <div *ngIf="pkmnData != null">
+    <div padding text-center>
+      <h1>{{pkmnData.name | titlecase}}</h1>
+      <img [src]="pkmnData.sprites.front_default">
+    </div>
+    <ion-list no-border>
+
+      <ion-list-header>
+        Specs
+      </ion-list-header>
+
+      <ion-item>
+        <ion-icon name='body' item-start></ion-icon>
+        Height
+        <ion-note item-end>
+          {{pkmnData.height}}
+        </ion-note>
+      </ion-item>
+
+      <ion-item>
+        <ion-icon name='cube' item-start></ion-icon>
+        Weight
+        <ion-note item-end>
+          {{pkmnData.weight}}
+        </ion-note>
+      </ion-item>
+
+    </ion-list>
+
+    <ion-list no-border>
+
+      <ion-list-header>
+        Types
+      </ion-list-header>
+
+      <ion-item *ngFor="let type of pkmnData.types">
+        <ion-icon [name]='getIcon(type.type.name)' item-start></ion-icon>
+        {{type.type.name | titlecase}}
+      </ion-item>
+
+    </ion-list>
+
+  </div>
+</ion-content>
